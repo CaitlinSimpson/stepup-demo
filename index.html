@@ -1,0 +1,948 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>StepUp | Interview Preparation Demo</title>
+<style>
+:root{
+  --navy:#111c34;--purple:#6557df;--teal:#0d9f91;
+  --bg:#f5f6fb;--text:#1b2942;--muted:#65738c;
+  --border:#e0e5f0;--white:#fff;--red:#b34343;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,
+"Segoe UI",sans-serif;background:var(--bg);color:var(--text);
+line-height:1.55}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+a{color:var(--purple)}
+header{background:var(--navy);color:white;padding:22px 0}
+.wrap{width:min(1120px,calc(100% - 32px));margin:auto}
+.top{display:flex;justify-content:space-between;align-items:center;
+gap:15px;flex-wrap:wrap}
+.logo{font-size:27px;font-weight:850;letter-spacing:-1px}
+.logo span{color:#a79bff}
+.subtitle{color:#bdc8dc;font-size:13px}
+nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+nav button{border:1px solid #ffffff35;background:#ffffff12;
+color:white;border-radius:11px;padding:10px 15px;font-weight:700}
+nav button.active{background:white;color:var(--navy)}
+main{padding:32px 0 75px}
+h1,h2,h3{line-height:1.2;letter-spacing:-.03em}
+h1{font-size:clamp(30px,5vw,45px);margin:0 0 12px}
+h2{font-size:25px}
+h3{font-size:18px}
+p{color:var(--muted)}
+.card{background:white;border:1px solid var(--border);
+border-radius:18px;padding:23px;margin-bottom:18px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+gap:18px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+gap:16px}
+.stat{background:white;border:1px solid var(--border);
+border-radius:16px;padding:20px}
+.stat strong{display:block;font-size:30px;color:var(--purple)}
+.stat small{color:var(--muted)}
+label{display:block;font-size:13px;font-weight:750;margin:15px 0 6px}
+input,textarea,select{display:block;width:100%;border:1px solid
+#ccd3e1;border-radius:11px;padding:12px;background:white;color:var(--text)}
+textarea{min-height:100px;resize:vertical}
+input:focus,textarea:focus,select:focus{outline:2px solid #6557df55;
+border-color:var(--purple)}
+.btn{border:0;background:var(--purple);color:white;padding:12px 18px;
+border-radius:11px;font-weight:750;display:inline-block;
+text-decoration:none}
+.btn.secondary{background:#eae8ff;color:#5144c4}
+.btn.danger{background:#fff0f0;color:var(--red)}
+.btn.teal{background:var(--teal)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.note{background:#eeecff;border-radius:12px;padding:14px;
+color:#5044ad;font-size:13px}
+.warning{background:#fff3df;color:#8c5c16;border-radius:12px;
+padding:14px;font-size:13px}
+.success{background:#e5f8f1;color:#08755f;border-radius:12px;
+padding:14px;font-size:13px}
+.tag{display:inline-block;border-radius:30px;padding:5px 10px;
+background:#eeecff;color:#5648bb;font-size:11px;font-weight:750;
+margin:3px}
+.tag.gap{background:#fff0d9;color:#95631a}
+.record{border:1px solid var(--border);border-radius:14px;
+padding:18px;margin:12px 0}
+.record h3{margin:0 0 8px}
+.record p{margin:8px 0;font-size:14px}
+.record .actions{margin-top:10px}
+.muted{color:var(--muted);font-size:13px}
+.hidden{display:none!important}
+.section{display:none}
+.section.active{display:block}
+hr{border:0;border-top:1px solid var(--border);margin:22px 0}
+footer{text-align:center;padding:25px;color:var(--muted);font-size:12px}
+.feedback-item{padding:13px;border-left:4px solid var(--purple);
+background:#f5f4ff;border-radius:8px;margin:10px 0}
+@media(max-width:750px){
+ .grid,.grid3{grid-template-columns:1fr}
+ .card{padding:18px}
+ nav button{flex:1 1 auto}
+}
+</style>
+</head>
+<body>
+
+<header>
+<div class="wrap">
+ <div class="top">
+  <div>
+   <div class="logo">↗ Step<span>Up</span></div>
+   <div class="subtitle">Promotion Interview Preparation | Working Demo</div>
+  </div>
+  <a class="btn secondary"
+     href="https://caitlinsimpson.github.io/stepup-landing/">
+    ← Landing page
+  </a>
+ </div>
+ <nav id="navigation">
+  <button data-tab="dashboard" class="active">Dashboard</button>
+  <button data-tab="evidence">Evidence Bank</button>
+  <button data-tab="gaps">Evidence Gaps</button>
+  <button data-tab="star">STAR Builder</button>
+  <button data-tab="practice">Interview Practice</button>
+  <button data-tab="settings">Save &amp; Test</button>
+ </nav>
+</div>
+</header>
+
+<main class="wrap">
+
+<section id="dashboard" class="section active">
+ <h1>Your interview preparation workspace</h1>
+ <p>Organise achievements, map competencies and practise
+ your answers for an Irish public-sector promotion interview.</p>
+ <div class="note">
+  <strong>Student prototype:</strong> The 10 starting achievements
+  are fictional examples, not real employee records.
+  Feedback is rule-based, not AI-generated.
+  Your changes are saved in this browser.
+ </div>
+ <div class="grid3" style="margin-top:20px">
+  <div class="stat"><small>Achievements</small>
+   <strong id="countRecords">0</strong></div>
+  <div class="stat"><small>Competencies with evidence</small>
+   <strong id="countCovered">0</strong></div>
+  <div class="stat"><small>Evidence gaps</small>
+   <strong id="countGaps">0</strong></div>
+ </div>
+ <div class="card" style="margin-top:20px">
+  <h2>How to use StepUp</h2>
+  <div class="grid3">
+   <div><h3>1. Collect evidence</h3>
+    <p>Review sample achievements or add your own.</p></div>
+   <div><h3>2. Build your answer</h3>
+    <p>Map competencies and structure an example using STAR.</p></div>
+   <div><h3>3. Practise and improve</h3>
+    <p>Try an interview question and review feedback.</p></div>
+  </div>
+  <button class="btn" onclick="showTab('evidence')">
+   Start with your evidence bank
+  </button>
+ </div>
+ <div class="card">
+  <h2>Target role</h2>
+  <label for="role">Role you are preparing for</label>
+  <input id="role" placeholder="e.g. Higher Executive Officer">
+  <button class="btn secondary" style="margin-top:12px"
+   onclick="saveRole()">Save target role</button>
+ </div>
+</section>
+
+<section id="evidence" class="section">
+ <h1>Evidence Bank</h1>
+ <p>Record work achievements and link each one to a competency.
+ The initial examples are visibly fictional.</p>
+
+ <div class="card">
+  <h2 id="formHeading">Add an achievement</h2>
+  <input type="hidden" id="editId">
+
+  <label for="achievementTitle">Achievement title</label>
+  <input id="achievementTitle"
+   placeholder="e.g. Improved a reporting process">
+
+  <label for="achievementCompetency">Competency</label>
+  <select id="achievementCompetency"></select>
+
+  <label for="achievementDescription">What did you do?</label>
+  <textarea id="achievementDescription"
+   placeholder="Describe your personal contribution and result."></textarea>
+
+  <div class="actions">
+   <button class="btn" onclick="saveAchievement()">
+    Save achievement
+   </button>
+   <button class="btn secondary" onclick="clearAchievementForm()">
+    Clear form
+   </button>
+  </div>
+ </div>
+
+ <div class="card">
+  <h2>Saved achievements</h2>
+  <label for="filterCompetency">Filter by competency</label>
+  <select id="filterCompetency" onchange="renderEvidence()"></select>
+  <div id="recordList"></div>
+ </div>
+</section>
+
+<section id="gaps" class="section">
+ <h1>Competency evidence gaps</h1>
+ <p>StepUp automatically checks whether each competency has
+ at least one mapped achievement.</p>
+ <div class="note">
+  This is a simple coverage check. Having one example does
+  not guarantee that it meets an interview panel's standard.
+ </div>
+ <div id="gapList" style="margin-top:20px"></div>
+ <div class="card">
+  <h2>Customise your competencies</h2>
+  <p>Add a competency from your own target-role framework.</p>
+  <label for="newCompetency">New competency name</label>
+  <input id="newCompetency" placeholder="Enter competency">
+  <button class="btn" style="margin-top:12px"
+   onclick="addCompetency()">Add competency</button>
+ </div>
+</section>
+
+<section id="star" class="section">
+ <h1>STAR Answer Builder</h1>
+ <p>Turn one achievement into a structured interview answer.</p>
+ <div class="card">
+  <label for="starRecord">Choose an achievement</label>
+  <select id="starRecord" onchange="loadStar()"></select>
+
+  <label for="situation">S — Situation</label>
+  <textarea id="situation"
+   placeholder="What was happening? What was the challenge?"></textarea>
+
+  <label for="task">T — Task</label>
+  <textarea id="task"
+   placeholder="What were you responsible for?"></textarea>
+
+  <label for="action">A — Action</label>
+  <textarea id="action"
+   placeholder="What did YOU personally do?"></textarea>
+
+  <label for="result">R — Result</label>
+  <textarea id="result"
+   placeholder="What changed? Include evidence if available."></textarea>
+
+  <div class="actions">
+   <button class="btn" onclick="saveStar()">Save STAR answer</button>
+   <button class="btn secondary" onclick="reviewStar()">
+    Check answer structure
+   </button>
+  </div>
+  <div id="starFeedback" style="margin-top:18px"></div>
+ </div>
+</section>
+
+<section id="practice" class="section">
+ <h1>Interview Practice</h1>
+ <p>Practise a competency-based question, receive
+ rule-based feedback and improve your answer.</p>
+
+ <div class="card">
+  <label for="practiceCompetency">Competency to practise</label>
+  <select id="practiceCompetency"
+   onchange="updatePracticeQuestion()"></select>
+
+  <div class="note" style="margin-top:16px">
+   <strong>Interview question:</strong>
+   <div id="questionText" style="margin-top:8px"></div>
+  </div>
+
+  <label for="practiceAnswer">Your practice answer</label>
+  <textarea id="practiceAnswer" style="min-height:190px"
+   placeholder="Describe the situation, task, your actions and results."></textarea>
+
+  <div class="actions">
+   <button class="btn" onclick="checkPractice()">
+    Get feedback
+   </button>
+   <button class="btn secondary" onclick="retryPractice()">
+    Retry answer
+   </button>
+  </div>
+
+  <div id="practiceFeedback" style="margin-top:18px"></div>
+ </div>
+
+ <div class="card">
+  <h2>Practice history</h2>
+  <p>Your attempts are saved in this browser.</p>
+  <div id="practiceHistory"></div>
+ </div>
+</section>
+
+<section id="settings" class="section">
+ <h1>Save, export and usability testing</h1>
+ <p>Review how this student prototype works and
+ record feedback from an independent tester.</p>
+
+ <div class="card">
+  <h2>Saving your work</h2>
+  <div class="success">
+   Your changes save automatically in this browser
+   and remain after a normal page refresh.
+  </div>
+  <p>
+   Browser storage is local to this device and browser.
+   Work saved on your laptop will not automatically
+   appear on your phone.
+  </p>
+  <div class="actions">
+   <button class="btn" onclick="exportData()">
+    Export data (.json)
+   </button>
+   <label class="btn secondary" style="margin:0">
+    Import data (.json)
+    <input type="file" id="importFile" accept=".json,application/json"
+     onchange="importData(event)" style="display:none">
+   </label>
+   <button class="btn danger" onclick="resetDemo()">
+    Reset fictional sample data
+   </button>
+  </div>
+ </div>
+
+ <div class="card">
+  <h2>Independent usability test notes</h2>
+  <p>Ask someone else to try the demo. Record what they
+  actually did and any problems they encountered.</p>
+
+  <label for="testTasks">What did the tester try?</label>
+  <textarea id="testTasks"
+   placeholder="Record actual actions, not invented results."></textarea>
+
+  <label for="testProblems">Where did they hesitate or get confused?</label>
+  <textarea id="testProblems"
+   placeholder="Record their real observations."></textarea>
+
+  <label for="testChanges">What did you change after the test?</label>
+  <textarea id="testChanges"
+   placeholder="Describe changes actually made."></textarea>
+
+  <button class="btn" style="margin-top:16px"
+   onclick="saveTestNotes()">Save test notes</button>
+
+  <p id="testStatus" class="muted"></p>
+ </div>
+
+ <div class="card">
+  <h2>Prototype status</h2>
+  <p id="hostingStatus"></p>
+  <p>
+   Available: fictional sample data, editable achievements,
+   competency coverage checks, STAR answers, interview
+   practice, feedback, local saving and export/import.
+  </p>
+  <p>
+   Not included: AI scoring, user accounts, paid subscriptions,
+   organisational dashboards or automatic cross-device syncing.
+  </p>
+ </div>
+</section>
+
+</main>
+
+<footer>
+ StepUp | Student-built demonstration | Fictional sample data |
+ Not affiliated with any public-sector recruitment body
+</footer>
+
+<script>
+"use strict";
+
+const KEY = "stepup_demo_compact_v5";
+
+const defaultCompetencies = [
+ "Communication",
+ "Delivering Results",
+ "Leadership",
+ "Teamwork",
+ "Problem Solving",
+ "Planning and Organising",
+ "Strategic Thinking",
+ "Customer Service"
+];
+
+const samples = [
+ {
+  title:"Fictional: Improved monthly reporting",
+  competency:"Delivering Results",
+  description:"Sample achievement: streamlined a reporting process and reduced duplicate work."
+ },
+ {
+  title:"Fictional: Resolved a customer enquiry",
+  competency:"Customer Service",
+  description:"Sample achievement: clarified a complex enquiry and provided a timely response."
+ },
+ {
+  title:"Fictional: Supported a new colleague",
+  competency:"Teamwork",
+  description:"Sample achievement: shared procedures and helped a colleague settle into a role."
+ },
+ {
+  title:"Fictional: Presented a team update",
+  competency:"Communication",
+  description:"Sample achievement: explained progress and next steps at a team meeting."
+ },
+ {
+  title:"Fictional: Coordinated a deadline",
+  competency:"Planning and Organising",
+  description:"Sample achievement: prioritised tasks to deliver a project by its deadline."
+ },
+ {
+  title:"Fictional: Solved a data issue",
+  competency:"Problem Solving",
+  description:"Sample achievement: investigated inconsistent records and corrected the process."
+ },
+ {
+  title:"Fictional: Led a small improvement",
+  competency:"Leadership",
+  description:"Sample achievement: organised colleagues around an agreed improvement."
+ },
+ {
+  title:"Fictional: Explained a policy change",
+  competency:"Communication",
+  description:"Sample achievement: prepared clear guidance for colleagues."
+ },
+ {
+  title:"Fictional: Reduced processing delays",
+  competency:"Delivering Results",
+  description:"Sample achievement: identified a bottleneck and suggested a more efficient workflow."
+ },
+ {
+  title:"Fictional: Organised a busy workload",
+  competency:"Planning and Organising",
+  description:"Sample achievement: reviewed priorities and allocated time to urgent work."
+ }
+];
+
+function freshData(){
+ return {
+  role:"Higher Executive Officer (illustrative)",
+  competencies:[...defaultCompetencies],
+  records:samples.map((s,i)=>({
+   id:i+1,
+   ...s,
+   fictional:true,
+   star:{s:"",t:"",a:"",r:""}
+  })),
+  practice:[],
+  test:{tasks:"",problems:"",changes:""}
+ };
+}
+
+let data;
+
+try{
+ const saved=JSON.parse(localStorage.getItem(KEY));
+ data=saved && Array.isArray(saved.records) &&
+ Array.isArray(saved.competencies) ? saved : freshData();
+}catch(e){
+ data=freshData();
+}
+
+function persist(){
+ try{
+  localStorage.setItem(KEY,JSON.stringify(data));
+ }catch(e){
+  alert("Browser storage is unavailable. Export your work to keep a copy.");
+ }
+}
+
+function escapeHTML(value){
+ return String(value??"").replace(/[&<>"']/g,c=>({
+  "&":"&amp;","<":"&lt;",">":"&gt;",
+  '"':"&quot;","'":"&#39;"
+ }[c]));
+}
+
+function el(id){return document.getElementById(id);}
+
+function showTab(name){
+ document.querySelectorAll(".section").forEach(section=>{
+  section.classList.toggle("active",section.id===name);
+ });
+ document.querySelectorAll("nav button").forEach(button=>{
+  button.classList.toggle("active",button.dataset.tab===name);
+ });
+ renderAll();
+ window.scrollTo(0,0);
+}
+
+document.querySelectorAll("nav button").forEach(button=>{
+ button.addEventListener("click",()=>showTab(button.dataset.tab));
+});
+
+function saveRole(){
+ data.role=el("role").value.trim();
+ persist();
+ alert("Target role saved.");
+}
+
+function fillSelect(id,values,firstOption){
+ const select=el(id);
+ const previous=select.value;
+ select.innerHTML="";
+ if(firstOption){
+  const option=document.createElement("option");
+  option.value="";
+  option.textContent=firstOption;
+  select.appendChild(option);
+ }
+ values.forEach(value=>{
+  const option=document.createElement("option");
+  option.value=value;
+  option.textContent=value;
+  select.appendChild(option);
+ });
+ if([...select.options].some(o=>o.value===previous)){
+  select.value=previous;
+ }
+}
+
+function renderSelectors(){
+ fillSelect("achievementCompetency",data.competencies);
+ fillSelect("filterCompetency",data.competencies,"All competencies");
+ fillSelect("practiceCompetency",data.competencies);
+
+ const select=el("starRecord");
+ const previous=select.value;
+ select.innerHTML="";
+ data.records.forEach(record=>{
+  const option=document.createElement("option");
+  option.value=record.id;
+  option.textContent=record.title;
+  select.appendChild(option);
+ });
+ if([...select.options].some(o=>o.value===previous)){
+  select.value=previous;
+ }
+}
+
+function clearAchievementForm(){
+ el("editId").value="";
+ el("achievementTitle").value="";
+ el("achievementDescription").value="";
+ el("formHeading").textContent="Add an achievement";
+}
+
+function saveAchievement(){
+ const title=el("achievementTitle").value.trim();
+ const competency=el("achievementCompetency").value;
+ const description=el("achievementDescription").value.trim();
+
+ if(!title || !competency || !description){
+  alert("Please complete all achievement fields.");
+  return;
+ }
+
+ const id=Number(el("editId").value);
+
+ if(id){
+  const record=data.records.find(r=>r.id===id);
+  if(record){
+   record.title=title;
+   record.competency=competency;
+   record.description=description;
+   record.fictional=false;
+  }
+ }else{
+  data.records.push({
+   id:Date.now(),
+   title,competency,description,
+   fictional:false,
+   star:{s:"",t:"",a:"",r:""}
+  });
+ }
+
+ persist();
+ clearAchievementForm();
+ renderAll();
+ alert("Achievement saved.");
+}
+
+function editAchievement(id){
+ const record=data.records.find(r=>r.id===id);
+ if(!record)return;
+ showTab("evidence");
+ el("editId").value=record.id;
+ el("achievementTitle").value=record.title;
+ el("achievementCompetency").value=record.competency;
+ el("achievementDescription").value=record.description;
+ el("formHeading").textContent="Edit achievement";
+ window.scrollTo(0,0);
+}
+
+function deleteAchievement(id){
+ if(!confirm("Delete this achievement?"))return;
+ data.records=data.records.filter(r=>r.id!==id);
+ persist();
+ renderAll();
+}
+
+function renderEvidence(){
+ const filter=el("filterCompetency").value;
+ const records=data.records.filter(r=>
+  !filter || r.competency===filter
+ );
+ const list=el("recordList");
+ list.innerHTML="";
+
+ if(!records.length){
+  list.innerHTML='<p>No achievements found.</p>';
+  return;
+ }
+
+ records.forEach(record=>{
+  const card=document.createElement("div");
+  card.className="record";
+  card.innerHTML=`
+   <h3>${escapeHTML(record.title)}</h3>
+   <span class="tag">${escapeHTML(record.competency)}</span>
+   ${record.fictional?
+    '<span class="tag gap">Fictional sample</span>':""}
+   <p>${escapeHTML(record.description)}</p>
+   <div class="actions">
+    <button class="btn secondary edit-btn">Edit</button>
+    <button class="btn danger delete-btn">Delete</button>
+   </div>`;
+  card.querySelector(".edit-btn").onclick=()=>
+   editAchievement(record.id);
+  card.querySelector(".delete-btn").onclick=()=>
+   deleteAchievement(record.id);
+  list.appendChild(card);
+ });
+}
+
+function coverageCount(competency){
+ return data.records.filter(r=>r.competency===competency).length;
+}
+
+function renderGaps(){
+ const container=el("gapList");
+ container.innerHTML="";
+
+ data.competencies.forEach(competency=>{
+  const count=coverageCount(competency);
+  const card=document.createElement("div");
+  card.className="card";
+  card.innerHTML=`
+   <h3>${escapeHTML(competency)}</h3>
+   <p>${count} mapped achievement${count===1?"":"s"}</p>
+   <div class="${count?"success":"warning"}">
+    ${count?
+     "Evidence present. Check its quality and relevance.":
+     "Evidence gap: no achievement is mapped to this competency."}
+   </div>`;
+  container.appendChild(card);
+ });
+}
+
+function addCompetency(){
+ const value=el("newCompetency").value.trim();
+ if(!value){
+  alert("Enter a competency name.");
+  return;
+ }
+ if(data.competencies.some(c=>
+  c.toLowerCase()===value.toLowerCase())){
+  alert("That competency already exists.");
+  return;
+ }
+ data.competencies.push(value);
+ el("newCompetency").value="";
+ persist();
+ renderAll();
+}
+
+function selectedStarRecord(){
+ return data.records.find(r=>
+  String(r.id)===el("starRecord").value
+ );
+}
+
+function loadStar(){
+ const record=selectedStarRecord();
+ const star=record?.star||{};
+ el("situation").value=star.s||"";
+ el("task").value=star.t||"";
+ el("action").value=star.a||"";
+ el("result").value=star.r||"";
+ el("starFeedback").innerHTML="";
+}
+
+function saveStar(){
+ const record=selectedStarRecord();
+ if(!record){
+  alert("Select an achievement first.");
+  return;
+ }
+ record.star={
+  s:el("situation").value.trim(),
+  t:el("task").value.trim(),
+  a:el("action").value.trim(),
+  r:el("result").value.trim()
+ };
+ persist();
+ el("starFeedback").innerHTML=
+  '<div class="success">STAR answer saved in this browser.</div>';
+}
+
+function reviewStar(){
+ const fields=[
+  ["Situation",el("situation").value.trim()],
+  ["Task",el("task").value.trim()],
+  ["Action",el("action").value.trim()],
+  ["Result",el("result").value.trim()]
+ ];
+ const suggestions=[];
+
+ fields.forEach(([name,value])=>{
+  if(!value){
+   suggestions.push(`Add your ${name.toLowerCase()} section.`);
+  }else if(value.length<40){
+   suggestions.push(`Expand your ${name.toLowerCase()} section with more detail.`);
+  }
+ });
+
+ const action=el("action").value;
+ if(action && !/\b(I|my|me)\b/i.test(action)){
+  suggestions.push("Explain what you personally did in the Action section.");
+ }
+
+ const result=el("result").value;
+ if(result && !/\d|improv|reduc|deliver|complet|achiev|resolv|outcome/i.test(result)){
+  suggestions.push("Make the result more specific. Include an outcome or evidence.");
+ }
+
+ const output=el("starFeedback");
+ if(!suggestions.length){
+  output.innerHTML=
+   '<div class="success">All four sections contain detail. Review the accuracy and relevance of your example before using it in an interview.</div>';
+ }else{
+  output.innerHTML=suggestions.map(s=>
+   `<div class="feedback-item">${escapeHTML(s)}</div>`
+  ).join("");
+ }
+}
+
+function updatePracticeQuestion(){
+ const competency=el("practiceCompetency").value;
+ el("questionText").textContent=
+  `Tell us about a time when you demonstrated ${competency.toLowerCase()}. What was your role, what actions did you take and what was the outcome?`;
+}
+
+function practiceSuggestions(answer){
+ const suggestions=[];
+ const words=answer.trim().split(/\s+/).filter(Boolean);
+
+ if(words.length<60){
+  suggestions.push("Your answer is quite short. Add context, actions and results.");
+ }
+ if(!/\b(I|my|me)\b/i.test(answer)){
+  suggestions.push("Use specific examples of your own contribution.");
+ }
+ if(!/\b(result|outcome|achiev|improv|reduc|deliver|complet|resolv)\w*/i.test(answer)){
+  suggestions.push("Explain the result or outcome of your actions.");
+ }
+ if(!/\b(because|therefore|so that|decided|chose|planned)\b/i.test(answer)){
+  suggestions.push("Explain a decision you made and why.");
+ }
+ if(!/\d/.test(answer)){
+  suggestions.push("Where appropriate, include a measurable result.");
+ }
+
+ if(!suggestions.length){
+  suggestions.push("Your answer includes several useful elements. Check that the example is accurate, relevant and clearly structured.");
+ }
+ return suggestions;
+}
+
+function checkPractice(){
+ const answer=el("practiceAnswer").value.trim();
+ const competency=el("practiceCompetency").value;
+
+ if(!answer){
+  alert("Write an answer before requesting feedback.");
+  return;
+ }
+
+ const suggestions=practiceSuggestions(answer);
+
+ data.practice.unshift({
+  id:Date.now(),
+  date:new Date().toLocaleString(),
+  competency,
+  answer,
+  suggestions
+ });
+
+ persist();
+
+ el("practiceFeedback").innerHTML=`
+  <h3>Rule-based feedback</h3>
+  <p class="muted">These checks do not assess your actual interview score.</p>
+  ${suggestions.map(s=>
+   `<div class="feedback-item">${escapeHTML(s)}</div>`
+  ).join("")}`;
+
+ renderPracticeHistory();
+}
+
+function retryPractice(){
+ el("practiceAnswer").focus();
+ el("practiceFeedback").innerHTML=
+  '<div class="note">Edit your answer and select Get feedback again.</div>';
+}
+
+function renderPracticeHistory(){
+ const container=el("practiceHistory");
+ container.innerHTML="";
+
+ if(!data.practice.length){
+  container.innerHTML="<p>No practice attempts saved yet.</p>";
+  return;
+ }
+
+ data.practice.slice(0,15).forEach(item=>{
+  const card=document.createElement("div");
+  card.className="record";
+  card.innerHTML=`
+   <strong>${escapeHTML(item.competency)}</strong>
+   <p class="muted">${escapeHTML(item.date)}</p>
+   <p>${escapeHTML(item.answer)}</p>
+   <button class="btn secondary">Use this answer again</button>`;
+  card.querySelector("button").onclick=()=>{
+   showTab("practice");
+   el("practiceCompetency").value=item.competency;
+   updatePracticeQuestion();
+   el("practiceAnswer").value=item.answer;
+   el("practiceAnswer").focus();
+  };
+  container.appendChild(card);
+ });
+}
+
+function saveTestNotes(){
+ data.test={
+  tasks:el("testTasks").value.trim(),
+  problems:el("testProblems").value.trim(),
+  changes:el("testChanges").value.trim()
+ };
+ persist();
+ renderTestStatus();
+ alert("Usability test notes saved.");
+}
+
+function renderTestStatus(){
+ const test=data.test||{};
+ const complete=Boolean(
+  test.tasks?.trim() &&
+  test.problems?.trim() &&
+  test.changes?.trim()
+ );
+ el("testStatus").textContent=complete?
+  "All three usability-test note fields contain saved text. Verify that they accurately describe a real independent test.":
+  "Usability-test notes are incomplete. Only record observations from a real independent tester.";
+}
+
+function exportData(){
+ const json=JSON.stringify(data,null,2);
+ const blob=new Blob([json],{type:"application/json"});
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement("a");
+ a.href=url;
+ a.download="stepup-demo-data.json";
+ a.click();
+ setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+
+function importData(event){
+ const file=event.target.files[0];
+ if(!file)return;
+
+ const reader=new FileReader();
+
+ reader.onload=()=>{
+  try{
+   const imported=JSON.parse(reader.result);
+   if(!Array.isArray(imported.records) ||
+      !Array.isArray(imported.competencies) ||
+      !Array.isArray(imported.practice)){
+    throw new Error("Invalid data structure");
+   }
+   if(!confirm("Replace current browser data with imported data?")){
+    return;
+   }
+   data=imported;
+   data.test=data.test||{tasks:"",problems:"",changes:""};
+   persist();
+   renderAll();
+   alert("Data imported.");
+  }catch(e){
+   alert("This file is not a valid StepUp export.");
+  }
+ };
+
+ reader.readAsText(file);
+ event.target.value="";
+}
+
+function resetDemo(){
+ if(!confirm(
+  "Reset all achievements, answers, practice attempts and test notes to the original fictional sample data?"
+ ))return;
+ data=freshData();
+ persist();
+ renderAll();
+ alert("Demo reset.");
+}
+
+function renderAll(){
+ el("role").value=data.role||"";
+
+ renderSelectors();
+ renderEvidence();
+ renderGaps();
+ renderPracticeHistory();
+
+ el("countRecords").textContent=data.records.length;
+ el("countCovered").textContent=data.competencies.filter(c=>
+  coverageCount(c)>0
+ ).length;
+ el("countGaps").textContent=data.competencies.filter(c=>
+  coverageCount(c)===0
+ ).length;
+
+ el("testTasks").value=data.test?.tasks||"";
+ el("testProblems").value=data.test?.problems||"";
+ el("testChanges").value=data.test?.changes||"";
+
+ renderTestStatus();
+ updatePracticeQuestion();
+ loadStar();
+
+ el("hostingStatus").textContent=
+  location.hostname.endsWith(".github.io")?
+  "This demo is hosted on GitHub Pages. Test the landing-page button on a phone and laptop.":
+  "This demo is ready for GitHub Pages publishing.";
+}
+
+persist();
+renderAll();
+</script>
+</body>
+</html>
